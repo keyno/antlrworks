@@ -1,3 +1,9 @@
+Version 1.5.1 - 10/03/2016
+
+October 3, 2016
+
+* Enchanced DOT parser. Multiline declarations supported now.
+
 Version 1.5 - 01/04/2013
 
 January 4, 2013

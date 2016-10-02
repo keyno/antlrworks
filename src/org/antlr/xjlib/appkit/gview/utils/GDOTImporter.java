@@ -60,25 +60,27 @@ public abstract class GDOTImporter {
             int c;  // current character
             int pc = -1;    // previous character
             while((c = br.read()) != -1) {
-                if(c == '\n') {
-                    if(pc == '\\') {
-                        // Remove the last \ if it was part of the DOT wrapping character
-                        line.deleteCharAt(line.length()-1);
-                    } else {
-                        GElement element = parseLine(line.toString());
-                        if(element != null) {
-                            if(graph == null)
-                                graph = element;
-                            else
-                                graph.addElement(element);
-                        }
-                        line.delete(0, line.length());
-                    }
-                } else if(c != '\r') {
-                    line.append((char)c);
-                } else if(c == '\r') {
-                    continue;
-                }
+            	if(pc == '\\') {
+            		// Remove the last \ if it was part of the DOT wrapping character
+	                line.deleteCharAt(line.length()-1);
+            	} else if((pc == '{' || pc == ';' || pc == '}')) { // Final tokens
+            		GElement element = parseLine(line.toString());
+            		if(element != null) {
+            			if(graph == null)
+            				graph = element;
+            			else
+            				graph.addElement(element);
+            		}
+            		line.delete(0, line.length());
+            	} 
+            	if(c == '\r' || c == '\n' || c == '\t') { // Replace all whitespaces to one space character
+            		c = ' ';
+            	}
+            	if(c == ' ' && pc == ' ') { // Remove duplicate spaces
+            		continue;
+            	} else {
+            		line.append((char)c);
+            	}
                 pc = c;
             }
         } finally {

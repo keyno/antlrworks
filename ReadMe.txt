@@ -24,7 +24,7 @@
     - antlrworks-1.x.zip
     - antlrworks-1.x-src.zip
     - antlrworks-1.x.jar
-- branch the release in p4 (main -> release/1.x)    
+- branch the release in p4 (main -> release/1.x)
 
 ***** Tools
 http://pmd.sourceforge.net/
